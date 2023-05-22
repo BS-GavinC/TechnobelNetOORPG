@@ -1,40 +1,18 @@
-﻿
-using TechnobelNetOORPG.Interfaces;
-using TechnobelNetOORPG.Models;
+﻿using TechnobelNetOORPG.Models;
 
-Warrior Thanos = new Warrior("Tanos", 2000, 450);
+Warrior HulkHougan = new Warrior("Houlk", 120, 34);
 
-Thanos.Resist();
-Thanos.Resist();
-Thanos.Resist();
+Mage Gandoulf = new Mage("Gandoulf", 100, 20);
 
-List<Personnage> personnages = new List<Personnage>{
-    new Mage("gandoulf", 120, 12),
+Hunter Degoulas = new Hunter("Degoulas", 20, 50);
 
-    new Mage("saroumane", 130, 10),
+Warrior Bouroumir = new Warrior("Bourourmir", 120, 34);
 
-    new Hunter("sabrina", 20, 4),
+Warrior Thanous = new Warrior("Thanous", 2000, 34);
 
-    new Warrior("IronMan", 50, 12)
 
-};
+HulkHougan.AddAttacker(Gandoulf);
+HulkHougan.AddAttacker(Degoulas);
+HulkHougan.AddAttacker(Bouroumir);
 
-foreach (var personnage in personnages)
-{
-    if (personnage is IRange)
-    {
-        IRange rangePerso = (IRange)personnage;
-        rangePerso.RangeAttack(Thanos);
-        Console.WriteLine(Thanos);
-    }
-}
-
-foreach (var personnage in personnages)
-{
-    if (personnage is IHeal)
-    {
-        IHeal healPerso = (IHeal)personnage;
-        healPerso.heal(Thanos);
-        Console.WriteLine(Thanos);
-    }
-}
+HulkHougan.GroupAttack(Thanous);

@@ -11,7 +11,12 @@ namespace TechnobelNetOORPG.Models
     {
         public Warrior(string name, int hP, int attack) : base(name, hP, attack)
         {
+            group += MeleeAttack;
         }
+
+        delegate void Group(Personnage ennemy);
+
+        Group group = null;
 
         public double ResistanceBuff { get ; set ; }
 
@@ -26,6 +31,39 @@ namespace TechnobelNetOORPG.Models
         public void Resist()
         {
             ResistanceBuff += 0.05;
+        }
+
+        public void AddAttacker(Personnage allies) 
+        {
+            if (allies is IRange)
+            {
+                IRange persoRange = (IRange)allies;
+                group += persoRange.RangeAttack;
+            }
+            else if(allies is IMelee)
+            {
+                IMelee persoMelee = (IMelee)allies;
+                group += persoMelee.MeleeAttack;
+            }
+        }
+
+        public void RemoveAttacker(Personnage allies)
+        {
+            if (allies is IRange)
+            {
+                IRange persoRange = (IRange)allies;
+                group -= persoRange.RangeAttack;
+            }
+            else if (allies is IMelee)
+            {
+                IMelee persoMelee = (IMelee)allies;
+                group -= persoMelee.MeleeAttack;
+            }
+        }
+
+        public void GroupAttack(Personnage ennemy)
+        {
+            group(ennemy);
         }
     }
 }
